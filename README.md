@@ -111,15 +111,18 @@ This project aims to build computer vision solutions that can detect, classify, 
 
 ## ⚙️ Hyperparameters and Experiments 
 
-"chaneg this according to our experiments"
+"change this according to our experiments"
 
 ### CNN Model:
 | Parameter       | Values Tried              |
 |----------------|---------------------------|
-| Learning Rate  | 0.001, 0.0001              |
+| Learning Rate  | 0.001, 0.005, 0.0001       |
 | Batch Size     | 32, 64                     |
 | Optimizer      | Adam, SGD                  |
-| Activation     | ReLU, Softmax (final layer)|
+| Activation     | ReLU, Softmax (final layer)
+| Conv Layers    | 3, 4                       |
+| Input Size     | 128x128, 224x224, 256x256  |
+| Epochs         | 10,15                      |
 
 ### U-Net Model:
 | Parameter       | Values Tried                    |
