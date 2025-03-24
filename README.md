@@ -1,4 +1,6 @@
-# Face Mask Detection, Classification, and Segmentation
+# README 
+
+<h1>Face Mask Detection, Classification, and Segmentation</h1>
 
 ## 🧠 Introduction
 This project aims to build computer vision solutions that can detect, classify, and segment face masks in images. It involves both classical machine learning techniques using handcrafted features and deep learning approaches like CNNs and U-Net to perform classification and segmentation tasks. At the end we see a comparison of both the approaches highlighting the supremacy of the deep learning techniques.
@@ -111,26 +113,56 @@ This project aims to build computer vision solutions that can detect, classify, 
 
 ## ⚙️ Hyperparameters and Experiments 
 
-"change this according to our experiments"
-
 ### CNN Model:
 | Parameter       | Values Tried              |
 |----------------|---------------------------|
-| Learning Rate  | 0.001, 0.005, 0.0001       |
-| Batch Size     | 32, 64                     |
-| Optimizer      | Adam, SGD                  |
+| Learning Rate  | 0.001, 0.005, 0.0001(#)       |
+| Batch Size     | 32, 64(#)                     |
+| Optimizer      | Adam(#), SGD                  |
 | Activation     | ReLU, Softmax (final layer)
-| Conv Layers    | 3, 4                       |
-| Input Size     | 128x128, 224x224, 256x256  |
+| Conv Layers    | 3, 4(#)                       |
+| Input Size     | 128x128(#), 224x224, 256x256  |
 | Epochs         | 10,15                      |
+
+**'#' indicates the best result**
+
+#### Experiment
+**Experiment**: Adam optimizer with 10 epochs, and learning rate 0.001
+**Findings**: Overfitting occurs after 3 epocs, early stopping helps
+![](./assets/optimizer-adam.png)
+
+#### Experiment
+**Experiment**: SGD with momentum 0.9, and learning rate 0.0001
+**Findings**: Prevents overfitting but is slow to converge
+![](./assets/optimizer-sgd-with-momentum.png)
+
+#### Experiment
+**Experiment**: Early stopping after 4 epochs with Adam optimizer, and learning rate 0.001
+**Findings**: Converges fast and does not overfit
+![](./assets/lr_.001_batch_64_epoch_4.png)
+
+#### Experiment
+**Experiment**: Batch size of 32 and 64 with Adam optimizer running for 10 epochs
+**Findings**: Batch size of 64 yields better results.
+![](./assets/lr_.0001_batch_32.png)
+![](./assets/lr_.0001_batch_64.png)
+
 
 ### U-Net Model:
 | Parameter       | Values Tried                    |
 |----------------|----------------------------------|
-| Epochs         | 20, 50                           |
-| Batch Size     | 16, 32                           |
+| Epochs         | 10, 25                           |
+| Batch Size     | 16                               |
 | Learning Rate  | 0.0001                           |
 | Loss Function  | Binary Cross-Entropy + Dice Loss |
+
+#### Experiment
+**Experiment**: Run for 10 and 25 epochs
+**Findings**: IoU score and loss were comparable for both, but train time was affected significantly.
+- IoU for 25 epochs came to be 93%, and loss was 5%
+![](./assets/unet-epochs-25.png)
+- IoU for 10 epochs came to be 91%, and loss was 6%
+![](./assets/unet-epochs-10.png)
 
 ## 📊 Results
 
@@ -140,17 +172,77 @@ This project aims to build computer vision solutions that can detect, classify, 
 |                                     | MLP               | Accuracy    | 89%      |
 |                                     | CNN               | Accuracy    | **95%**  |
 | Region Segmentation                                     | Canny Edge Detection    | IoU         | 0.55     |
-| Mask Segmentation                   | U-Net             | IoU         | **0.84** |
+| Mask Segmentation                   | U-Net             | IoU         | **0.92** |
 
-"Provide images here too"
+
+| Model | Epochs | Time Taken      | Dataset                          | Size     |
+|-------|--------|----------------|----------------------------------|---------|
+| CNN   | 15     | 10 to 20 mins  | Face Mask Detection Dataset     | ~162MB  |
+| UNET  | 10     | 4 hours        | Masked Face Segmentation Dataset | ~2.12GB |
+| UNET  | 25     | ~12 hours      | Masked Face Segmentation Dataset | ~2.12GB |
+
+### Classification results 
+![](./assets/svm_mlp_test_compare.png)
+
+### UNET Segmentation results
+![](./assets/unet-output-1.jpg)
+![](./assets/unet-output-2.jpg)
+![](./assets/unet-output-3.jpg)
+![](./assets/unet-output-4.jpg)
+
 
 ## 🔍 Observations and Analysis
 - CNN outperformed classical ML classifiers significantly due to its ability to learn complex features.
 - Traditional segmentation techniques provided rough masks but lacked precision.
 - U-Net performed extremely well in mask segmentation, showcasing its strength in pixel-level tasks.
-- Challenges:
-     - Face Mask Detection dataset contained images of with mask and without masked in 2 separate folders. Therefore, it needs to be separated into a train, validation and test set manually.
-     - Face Mask Detection dataset have images with multiple scales that need to be brought to one scale which was done using transformation technique.
+
+### **Challenges Faced and Solutions**  
+
+#### **1. Manual Dataset Splitting for CNN**  
+The CNN dataset was structured with masked and unmasked images stored in separate folders. This required a **manual split** into training, validation, and test sets to ensure a proper distribution of images across these subsets. To address this, the dataset was **randomly split using a script**, maintaining a balanced class distribution in each subset.  
+
+#### **2. Handling Image Scale Variability in CNN**  
+The images in the CNN dataset were of varying resolutions, which could negatively impact model performance. To standardize the input, all images were **resized to a uniform scale** using `torchvision.transforms.Resize()` before being fed into the model. This ensured consistency in feature extraction and improved training stability.  
+
+#### **3. Memory Constraints with UNET Dataset**  
+The dataset for UNET exceeded **2GB**, making it impractical to load all images into memory at once. This issue was mitigated by utilizing PyTorch’s **DataLoader**, which loads images in batches rather than all at once. This approach significantly reduced memory consumption while maintaining efficient training by leveraging mini-batch processing.  
+
+Would you like to refine or expand any part of this section? 🚀
+
+### Comparision of Neural Network and SVM for binary classification
+
+**svm-mlp-confusion-matrix**
+![](./assets/svm-mlp-confusion-matrix.png)
+
+**svm-mlp-precision-recall**
+![](./assets/svm-mlp-precision-recall.png)
+
+**svm-mlp-roc**
+![](./assets/svm-mlp-roc.png)
+
+- The precision-recall curve for both models shows that they maintain high precision at high recall values.
+
+- SVM seems to have slightly better precision at high recall values compared to MLP.
+
+- SVM achieves a higher AUC but is heavily biased towards predicting "With Mask". It has high precision for this class but struggles to recognize "Without Mask" images.
+
+- MLP has a slightly lower AUC but provides a more balanced classification, with better recall for "Without Mask".
+
+- If false negatives (missing unmasked faces) are critical, MLP is the better choice.
+
+- If false positives (wrongly classifying unmasked faces as masked) are acceptable, SVM might work better.
+
+### Comparision with Neural Network (MLP)
+
+![](./assets/confustion_matrix_cnn_compared.png)
+
+![](./assets/precision_recall_cnn_compared.png)
+![](./assets/roc_cnn_compared.png)
+
+![](./assets/mlp_vs_cnn_missclassifications_compare.png)
+
+Sample images where MLP (Neural Network) falls short.
+![](./assets/mlp_shortcomings_cnn_compared.png)
 
 
 ## ▶️ How to Run the Code
