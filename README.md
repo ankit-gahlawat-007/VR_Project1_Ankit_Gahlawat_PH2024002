@@ -149,6 +149,9 @@ This project aims to build computer vision solutions that can detect, classify, 
 - Traditional segmentation techniques provided rough masks but lacked precision.
 - U-Net performed extremely well in mask segmentation, showcasing its strength in pixel-level tasks.
 - Challenges:
+     - The dataset contained images of with mask and without masked in 2 separate folders. Therefore, it needs to be separated into a train, validation and test set manually.
+     - The dataset has images with multiple scales that need to be brought to one scale which was done using transformation technique.
+
 
 ## ▶️ How to Run the Code
 
