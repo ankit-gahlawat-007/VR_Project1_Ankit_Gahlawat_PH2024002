@@ -255,7 +255,25 @@ Sample images where MLP (Neural Network) falls short.
 
 ## ▶️ How to Run the Code
 
+`git clone https://github.com/ankit-gahlawat-007/VR_Project1_Ankit_Gahlawat_PH2024002.git`
+
 ### 1. Binary Classification (Handcrafted + CNN):
+1. Install dependencies
+```sh
+pip install -r requirements.txt
+```
+2. Use jupyter notebook (or [Google Colab](colab.google.com)) to open `.ipynb` notebooks
+3. Update path to dataset
+4. Run all cells
 
 ### 2. Segmentation (Handcrafted + CNN):
+1. Install dependencies
+```sh
+pip install -r requirements.txt
+```
+2. Download our trained UNET model (~200Mb) from [here](https://drive.google.com/file/d/1zt8MyqLVxG3Unn4sTagGQINInoNIZsIb/view?usp=sharing)
+3. Save it in repo's directory (top-leve)
+4. Update path to dataset
+5. Run code in sections *except for 'UNET Training' section* (because training code takes hours to finish)
+
 
