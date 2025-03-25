@@ -197,7 +197,7 @@ This project aims to build computer vision solutions that can detect, classify, 
 ## 🔍 Observations and Analysis
 - CNN outperformed classical ML classifiers significantly due to its ability to learn complex features.
 - Traditional segmentation techniques provided rough masks but lacked precision.
-- U-Net performed extremely well in mask segmentation, showcasing its strength in pixel-level tasks.
+- U-Net performed extremely well in mask segmentation. On 383 images kept separately for testing, it's IoU is 0.92 compared to just 0.34 from traditional methods.
 
 ### **Challenges Faced and Solutions**  
 
