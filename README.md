@@ -2,6 +2,8 @@
 
 <h1>Face Mask Detection, Classification, and Segmentation</h1>
 
+The main files for the **binary classification** and **segmentation** tasks are `Image Classification.ipynb` and `Image Segmentation.ipynb` respectively.
+
 ## Contributors:
 - Ankit Gahlawat - PH2024002
 - Kushagra Mehrotra - MS2024011
@@ -262,7 +264,7 @@ Sample images where MLP (Neural Network) falls short.
 ```sh
 pip install -r requirements.txt
 ```
-2. Use jupyter notebook (or [Google Colab](colab.google.com)) to open `.ipynb` notebooks
+2. Use jupyter notebook (or [Google Colab](https://colab.google.com)) to open the `Image Classification.ipynb` notebook
 3. Update path to dataset
 4. Run all cells
 
@@ -272,8 +274,9 @@ pip install -r requirements.txt
 pip install -r requirements.txt
 ```
 2. Download our trained UNET model (~200Mb) from [here](https://drive.google.com/file/d/1zt8MyqLVxG3Unn4sTagGQINInoNIZsIb/view?usp=sharing)
-3. Save it in repo's directory (top-leve)
-4. Update path to dataset
-5. Run code in sections *except for 'UNET Training' section* (because training code takes hours to finish)
+3. Save it in repo's directory (top-level)
+4. Open `Image Segmentation.ipynb`
+5. Update path to dataset
+6. Run code in sections *except for 'UNET Training' section* (because training code takes hours to finish)
 
 
