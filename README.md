@@ -171,7 +171,7 @@ This project aims to build computer vision solutions that can detect, classify, 
 | Binary Classification               | SVM               | Accuracy    | 91%      |
 |                                     | MLP               | Accuracy    | 89%      |
 |                                     | CNN               | Accuracy    | **95%**  |
-| Region Segmentation                                     | Canny Edge Detection    | IoU         | 0.55     |
+| Region Segmentation                                     | Canny Edge Detection    | IoU         | 0.34     |
 | Mask Segmentation                   | U-Net             | IoU         | **0.92** |
 
 
@@ -183,6 +183,9 @@ This project aims to build computer vision solutions that can detect, classify, 
 
 ### Classification results 
 ![](./assets/svm_mlp_test_compare.png)
+
+### Traditional Segmentation Results
+![](./assets/traditional_seg_results.png)
 
 ### UNET Segmentation results
 ![](./assets/unet-output-1.jpg)
@@ -206,8 +209,6 @@ The images in the CNN dataset were of varying resolutions, which could negativel
 
 #### **3. Memory Constraints with UNET Dataset**  
 The dataset for UNET exceeded **2GB**, making it impractical to load all images into memory at once. This issue was mitigated by utilizing PyTorch’s **DataLoader**, which loads images in batches rather than all at once. This approach significantly reduced memory consumption while maintaining efficient training by leveraging mini-batch processing.  
-
-Would you like to refine or expand any part of this section? 🚀
 
 ### Comparision of Neural Network and SVM for binary classification
 
