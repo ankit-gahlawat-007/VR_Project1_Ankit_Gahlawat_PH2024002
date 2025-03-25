@@ -2,6 +2,13 @@
 
 <h1>Face Mask Detection, Classification, and Segmentation</h1>
 
+## Contributors:
+- Ankit Gahlawat - PH2024002
+- Kushagra Mehrotra - MS2024011
+- Garvit Singla - MS2024009
+
+
+
 ## 🧠 Introduction
 This project aims to build computer vision solutions that can detect, classify, and segment face masks in images. It involves both classical machine learning techniques using handcrafted features and deep learning approaches like CNNs and U-Net to perform classification and segmentation tasks. At the end we see a comparison of both the approaches highlighting the supremacy of the deep learning techniques.
 
